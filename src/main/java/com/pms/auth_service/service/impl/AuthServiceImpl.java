@@ -5,6 +5,7 @@ import com.pms.auth_service.model.User;
 import com.pms.auth_service.repository.UserRepository;
 import com.pms.auth_service.service.AuthService;
 import com.pms.auth_service.service.UserService;
+import com.pms.auth_service.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
 
     @Override
