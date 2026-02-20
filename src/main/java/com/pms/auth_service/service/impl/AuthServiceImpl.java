@@ -6,6 +6,7 @@ import com.pms.auth_service.repository.UserRepository;
 import com.pms.auth_service.service.AuthService;
 import com.pms.auth_service.service.UserService;
 import com.pms.auth_service.utils.JwtUtil;
+import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,17 @@ public class AuthServiceImpl implements AuthService {
                 .filter(u -> passwordEncoder.matches(requestDTO.getPassword(),u.getPassword()))
                 .map(u -> jwtUtil.generateToken(u.getEmail(),u.getPassword()));
         return token;
+
+    }
+
+    @Override
+    public boolean validateToken(String token) {
+        try {
+            jwtUtil.validateToken(token);
+            return true;
+        } catch (JwtException e) {
+            return false;
+        }
 
     }
 }

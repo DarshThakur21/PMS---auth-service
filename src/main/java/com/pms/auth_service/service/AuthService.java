@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface AuthService {
     Optional<String> authenticate(LoginRequestDTO requestDTO);
+
+    boolean validateToken(String substring);
 }
